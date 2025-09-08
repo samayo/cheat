@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One‑Page Dev Cheatsheet</title>
+  <style>
+    :root{
+      --fg:#111;--muted:#666;--bg:#fff;--line:#ddd;
+    }
+    html,body{height:100%;margin:0;}
+    body{font:11px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif;color:var(--fg);background:var(--bg);}    
+    .wrap{height:100vh;display:grid;grid-template-rows:auto 1fr auto;}
+    header{padding:6px 10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+    header h1{font-size:12px;margin:0;font-weight:700;}
+    header small{color:var(--muted);}    
+
+    .layout{display:grid;grid-template-columns:140px 1fr;height:calc(100vh - 54px);} 
+    .side{border-right:1px solid var(--line);padding:6px;overflow-y:auto;}
+    .side h3{margin:0 0 6px 0;font-size:11px}
+    .side a{display:block;padding:3px 2px;color:inherit;text-decoration:none;font-size:11px}
+    .side a:hover{text-decoration:underline}
+
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px;overflow:auto}
+    .pane{border:1px solid var(--line);border-radius:4px;padding:6px;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+    .title{font-weight:800;font-size:11px;margin:0 0 4px 0;letter-spacing:.2px}
+    .sub{font-weight:700;margin:6px 0 3px;color:#222}
+    ul{margin:0;padding:0;list-style:none}
+    li{display:block;margin:0 0 2px 0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,Monaco,monospace;font-size:10px;background:#f7f7f7;border:1px solid #eee;border-radius:4px;padding:0 3px}
+    .hint{color:var(--muted)}
+    footer{padding:5px 8px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:10px}
+    .pane:target{border-color:#06c;box-shadow:0 0 0 1px #06c inset}
+    .pane:target .title{color:#06c}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>One‑Page Dev Cheatsheet</h1>
+      <small class="hint">Use left sidebar to jump quickly. Zoom out if needed. <span class="kbd">Ctrl</span>+<span class="kbd">F</span> also works.</small>
+    </header>
+
+    <main class="layout">
+      <aside class="side">
+        <h3>Jump to</h3>
+        <a href="#nginx">NGINX</a>
+        <a href="#php">PHP</a>
+        <a href="#mariadb">MariaDB</a>
+        <a href="#utils">Utils</a>
+        <a href="#letsencrypt">Let's Encrypt</a>
+        <a href="#ssh">SSH</a>
+        <a href="#mysql">MySQL</a>
+        <a href="#composer">Composer</a>
+        <a href="#npm">NPM</a>
+        <a href="#git">Git</a>
+        <a href="#gitflow">Git Flow</a>
+        <a href="#paths">Paths</a>
+      </aside>
+      <div class="grid">
+
+      <!-- NGINX -->
+      <section class="pane" id="nginx">
+        <h2 class="title">NGINX</h2>
+        <h3 class="sub">Install/Update</h3>
+        <ul class="cols-compact">
+          <li><code>sudo apt update</code></li>
+          <li><code>sudo apt upgrade -y</code></li>
+          <li><code>sudo apt install nginx -y</code></li>
+        </ul>
+        <h3 class="sub">Start/Enable</h3>
+        <ul>
+          <li><code>sudo systemctl start nginx</code></li>
+          <li><code>sudo systemctl enable nginx</code></li>
+        </ul>
+        <h3 class="sub">Config</h3>
+        <ul>
+          <li><code>sudo vim /etc/nginx/nginx.conf</code></li>
+          <li><code>sudo nginx -t</code></li>
+          <li><code>sudo systemctl reload nginx</code></li>
+        </ul>
+      </section>
+
+      <!-- PHP 8.2 -->
+      <section class="pane" id="php">
+        <h2 class="title">PHP 8.2</h2>
+        <h3 class="sub">Install</h3>
+        <ul>
+          <li><code>sudo apt install php8.2 php8.2-fpm -y</code></li>
+          <li><code>sudo apt install php8.2-common php8.2-mysql ...</code></li>
+        </ul>
+      </section>
+
+      <!-- MariaDB -->
+      <section class="pane" id="mariadb">
+        <h2 class="title">MariaDB</h2>
+        <ul>
+          <li><code>sudo apt install mariadb-server -y</code></li>
+          <li><code>sudo mysql_secure_installation</code></li>
+        </ul>
+      </section>
+
+      <!-- Utils -->
+      <section class="pane" id="utils">
+        <h2 class="title">Utils</h2>
+        <ul>
+          <li><code>sudo apt install wget git curl zip unzip -y</code></li>
+          <li><code>tar -czf site.tgz /var/www/site</code></li>
+        </ul>
+      </section>
+
+      <!-- Let's Encrypt -->
+      <section class="pane" id="letsencrypt">
+        <h2 class="title">Let's Encrypt</h2>
+        <ul>
+          <li><code>sudo snap install --classic certbot</code></li>
+          <li><code>sudo certbot --nginx</code></li>
+        </ul>
+      </section>
+
+      <!-- SSH -->
+      <section class="pane" id="ssh">
+        <h2 class="title">SSH</h2>
+        <ul>
+          <li><code>sudo apt install openssh-server -y</code></li>
+          <li><code>scp file user@host:/path/</code></li>
+        </ul>
+      </section>
+
+      <!-- MySQL -->
+      <section class="pane" id="mysql">
+        <h2 class="title">MySQL SQL</h2>
+        <ul>
+          <li><code>CREATE DATABASE db;</code></li>
+          <li><code>mysql -u user -p db < dump.sql</code></li>
+        </ul>
+      </section>
+
+      <!-- Composer -->
+      <section class="pane" id="composer">
+        <h2 class="title">Composer</h2>
+        <ul>
+          <li><code>composer install</code></li>
+          <li><code>composer update</code></li>
+        </ul>
+      </section>
+
+      <!-- NPM -->
+      <section class="pane" id="npm">
+        <h2 class="title">NPM Publish</h2>
+        <ul>
+          <li><code>npm version patch</code></li>
+          <li><code>npm publish</code></li>
+        </ul>
+      </section>
+
+      <!-- Git -->
+      <section class="pane" id="git">
+        <h2 class="title">Git Basics</h2>
+        <ul>
+          <li><code>git init</code></li>
+          <li><code>git add -A</code></li>
+        </ul>
+      </section>
+
+      <!-- Git Flow -->
+      <section class="pane" id="gitflow">
+        <h2 class="title">Git Flow</h2>
+        <ul>
+          <li><code>git switch -c feat/&lt;desc&gt;</code> <span class="hint"># start a feature branch (don’t commit on main)</span></li>
+          <li><code>git add -A &amp;&amp; git commit -m "wip: &lt;message&gt;"</code> <span class="hint"># save progress early/often</span></li>
+          <li><code>git push -u origin HEAD</code> <span class="hint"># back up the branch remotely</span></li>
+          <li><code>git stash push -m "wip: &lt;msg&gt;"</code> <span class="hint"># park messy changes without committing (optional)</span></li>
+          <li><code>git switch main &amp;&amp; git pull</code> <span class="hint"># update main before merging</span></li>
+          <li><code>git merge --squash feat/&lt;desc&gt; &amp;&amp; git commit -m "feat: &lt;summary&gt;"</code> <span class="hint"># squash-merge feature into main</span></li>
+          <li><code>git tag -a vX.Y.Z -m "release: &lt;notes&gt;"</code> <span class="hint"># mark a stable checkpoint (use semver)</span></li>
+          <li><code>git push origin main --tags</code> <span class="hint"># push code and tags</span></li>
+          <li><code>git revert --no-edit vX.Y.Z..HEAD</code> <span class="hint"># rollback everything after the tag if needed</span></li>
+          <li><code>git switch -c release/X.Y.Z vX.Y.Z</code> <span class="hint"># hotfix branch from the tag; tag vX.Y.Z+1 when done</span></li>
+        </ul>
+      </section>
+
+      <!-- Paths -->
+      <section class="pane" id="paths">
+        <h2 class="title">Paths & Tips</h2>
+        <ul>
+          <li><code>/var/www/&lt;site&gt;</code></li>
+          <li><code>/etc/nginx/sites-available</code></li>
+        </ul>
+      </section>
+
+      </div>
+    </main>
+
+    <footer>
+      <div class="hint">v2 • now with sidebar navigation • edit as index.html</div>
+    </footer>
+  </div>
+</body>
+</html>
