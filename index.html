@@ -112,10 +112,14 @@
       <!-- Let's Encrypt -->
       <section class="pane" id="letsencrypt">
         <h2 class="title">Let's Encrypt</h2>
-        <ul>
-          <li><code>sudo snap install --classic certbot</code></li>
-          <li><code>sudo certbot --nginx</code></li>
-        </ul>
+          <ul>
+            <li><code>sudo snap install --classic certbot</code> <span class="hint" title="Install certbot via snap (recommended)">?</span></li>
+            <li><code>sudo ln -s /snap/bin/certbot /usr/bin/certbot</code> <span class="hint" title="Symlink certbot for easier access">?</span></li>
+            <li><code>sudo certbot --nginx</code> <span class="hint" title="Obtain and install certificate for NGINX">?</span></li>
+            <li><code>sudo certbot renew --dry-run</code> <span class="hint" title="Test automatic renewal">?</span></li>
+            <li><code>sudo certbot certificates</code> <span class="hint" title="List all managed certificates">?</span></li>
+            <li><code>sudo certbot delete --cert-name example.com</code> <span class="hint" title="Remove a certificate by name">?</span></li>
+          </ul>
       </section>
 
       <!-- SSH -->
@@ -129,11 +133,18 @@
 
       <!-- MySQL -->
       <section class="pane" id="mysql">
-        <h2 class="title">MySQL SQL</h2>
-        <ul>
-          <li><code>CREATE DATABASE db;</code></li>
-          <li><code>mysql -u user -p db < dump.sql</code></li>
-        </ul>
+          <h2 class="title">MySQL</h2>
+          <ul>
+            <li><code>CREATE DATABASE db;</code> <span class="hint" title="Create a new database">?</span></li>
+            <li><code>CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';</code> <span class="hint" title="Create a new user">?</span></li>
+            <li><code>GRANT ALL PRIVILEGES ON db.* TO 'user'@'localhost';</code> <span class="hint" title="Grant all privileges on db to user">?</span></li>
+            <li><code>FLUSH PRIVILEGES;</code> <span class="hint" title="Reload privilege tables">?</span></li>
+            <li><code>mysql -u user -p db &lt; dump.sql</code> <span class="hint" title="Import a database dump">?</span></li>
+            <li><code>mysqldump -u user -p db &gt; dump.sql</code> <span class="hint" title="Export a database dump">?</span></li>
+            <li><code>SHOW GRANTS FOR 'user'@'localhost';</code> <span class="hint" title="Show privileges for a user">?</span></li>
+            <li><code>DROP DATABASE db;</code> <span class="hint" title="Delete a database">?</span></li>
+            <li><code>DROP USER 'user'@'localhost';</code> <span class="hint" title="Delete a user">?</span></li>
+          </ul>
       </section>
 
       <!-- Composer -->
@@ -154,12 +165,26 @@
         </ul>
       </section>
 
-      <!-- Git -->
-      <section class="pane" id="git">
-        <h2 class="title">Git Basics</h2>
+      <!-- Git Flow -->
+      <section class="pane" id="gitflow">
+        <h2 class="title">Git Workflow</h2>
         <ul>
-          <li><code>git init</code></li>
-          <li><code>git add -A</code></li>
+          <li><code>git clone &lt;repo-url&gt;</code> <span class="hint" title="Clone a repository">?</span></li>
+          <li><code>git switch -c feat/&lt;desc&gt;</code> <span class="hint" title="Create and switch to a new feature branch">?</span></li>
+          <li><code>git status</code> <span class="hint" title="Check current changes">?</span></li>
+          <li><code>git add -A</code> <span class="hint" title="Stage all changes">?</span></li>
+          <li><code>git commit -m "feat: &lt;desc&gt;"</code> <span class="hint" title="Commit staged changes">?</span></li>
+          <li><code>git push -u origin HEAD</code> <span class="hint" title="Push branch to remote and set upstream">?</span></li>
+          <li><code>git fetch origin</code> <span class="hint" title="Fetch latest changes from remote">?</span></li>
+          <li><code>git switch main</code> <span class="hint" title="Switch to main branch">?</span></li>
+          <li><code>git pull --ff-only</code> <span class="hint" title="Update local main branch">?</span></li>
+          <li><code>git merge --squash feat/&lt;desc&gt;</code> <span class="hint" title="Squash-merge feature branch into main">?</span></li>
+          <li><code>git commit -m "feat: &lt;desc&gt; (squashed)"</code> <span class="hint" title="Commit squashed changes">?</span></li>
+          <li><code>git push origin main</code> <span class="hint" title="Push main branch to remote">?</span></li>
+          <li><code>git tag -a vX.Y.Z -m "Release vX.Y.Z: &lt;desc&gt;"</code> <span class="hint" title="Tag a release">?</span></li>
+          <li><code>git push origin vX.Y.Z</code> <span class="hint" title="Push tag to remote">?</span></li>
+          <li><code>git branch -d feat/&lt;desc&gt;</code> <span class="hint" title="Delete local feature branch">?</span></li>
+          <li><code>git push origin --delete feat/&lt;desc&gt;</code> <span class="hint" title="Delete remote feature branch">?</span></li>
         </ul>
       </section>
 
@@ -180,12 +205,32 @@
         </ul>
       </section>
 
-      <!-- Paths -->
-      <section class="pane" id="paths">
-        <h2 class="title">Paths & Tips</h2>
+      <!-- Bash & Shell -->
+      <section class="pane" id="shell">
+        <h2 class="title">Shell & Bash</h2>
         <ul>
-          <li><code>/var/www/&lt;site&gt;</code></li>
-          <li><code>/etc/nginx/sites-available</code></li>
+          <li><code>chmod +x script.sh</code> <span class="hint" title="Make a script executable">?</span></li>
+          <li><code>./script.sh</code> <span class="hint" title="Run a shell script">?</span></li>
+          <li><code>export VAR=value</code> <span class="hint" title="Set an environment variable">?</span></li>
+          <li><code>echo $VAR</code> <span class="hint" title="Print variable value">?</span></li>
+          <li><code>cat file.txt | grep 'pattern'</code> <span class="hint" title="Search for a pattern in a file">?</span></li>
+          <li><code>find . -name '*.js'</code> <span class="hint" title="Find all .js files recursively">?</span></li>
+          <li><code>ps aux | grep process</code> <span class="hint" title="Find running processes">?</span></li>
+          <li><code>kill -9 &lt;pid&gt;</code> <span class="hint" title="Force kill a process">?</span></li>
+        </ul>
+      </section>
+
+      <!-- Docker -->
+      <section class="pane" id="docker">
+        <h2 class="title">Docker</h2>
+        <ul>
+          <li><code>docker build -t myapp .</code> <span class="hint" title="Build Docker image from Dockerfile">?</span></li>
+          <li><code>docker run -d -p 8080:80 myapp</code> <span class="hint" title="Run container in detached mode">?</span></li>
+          <li><code>docker ps</code> <span class="hint" title="List running containers">?</span></li>
+          <li><code>docker exec -it &lt;container&gt; bash</code> <span class="hint" title="Open shell in running container">?</span></li>
+          <li><code>docker stop &lt;container&gt;</code> <span class="hint" title="Stop a running container">?</span></li>
+          <li><code>docker rm &lt;container&gt;</code> <span class="hint" title="Remove a container">?</span></li>
+          <li><code>docker rmi &lt;image&gt;</code> <span class="hint" title="Remove an image">?</span></li>
         </ul>
       </section>
 
